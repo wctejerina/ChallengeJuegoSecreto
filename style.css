@@ -1,0 +1,803 @@
+:root {
+  --color-primary: #4b69fd;
+  --color-secondary: #fff9eb;
+  --color-tertiary: #c4c4c4;
+  --color-button: #2bfe35;
+  --color-button-hover: #2f00ff;
+  --color-text: #444444;
+  --color-white: #ffffff;
+}
+
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+/* Banner */
+.header-banner {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  background-color: var(--color-primary);
+}
+
+/* Contenedor principal de dos columnas */
+.content-container {
+  flex: 80%;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-secondary);
+  border: 1px solid #000;
+  border-radius: 64px 64px 0 0;
+}
+
+/* Panel izquierdo - Formulario y controles */
+.left-panel {
+  flex: 50%; /* Cambiar de 40% a 50% */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Panel derecho - Lista de amigos */
+.right-panel {
+  flex: 50%; /* Cambiar de 60% a 50% */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Sección de entrada */
+.input-section {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.instructions-list li {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--color-text);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(196, 196, 196, 0.3);
+  position: relative;
+  padding-left: 20px;
+}
+
+.instructions-list li:before {
+  content: "•";
+  color: var(--color-primary);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.instructions-list li:last-child {
+  border-bottom: none;
+}
+
+/* Contenedor de la lista de amigos */
+.friends-list-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.friends-list-wrapper {
+  /* Altura fija que coincida con el panel izquierdo */
+  height: 610px; /* Altura fija para alinear con el panel izquierdo */
+  min-height: 250px; /* Mantener altura mínima consistente */
+  max-height: 610px; /* Límite máximo igual para consistencia */
+
+  /* Scroll interno cuando sea necesario */
+  overflow-y: auto;
+
+  /* Estilos visuales */
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  background-color: var(--color-white);
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Buscador de amigos */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 0 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid var(--color-primary);
+  border-radius: 25px;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-white);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-button);
+  box-shadow: 0 0 0 3px rgba(254, 101, 43, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--color-tertiary);
+  font-style: italic;
+}
+
+.search-button {
+  background-color: var(--color-white); /* Cambiar de azul a blanco */
+  color: var(--color-text); /* Cambiar a negro para la cruz */
+  border: 2px solid var(--color-primary); /* Borde azul para contraste */
+  border-radius: 50%; /* Mantener forma redonda */
+  width: 44px; /* Ajustar para compensar el borde de 2px */
+  height: 44px; /* Asegurar que sea exactamente igual al width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0; /* Eliminar cualquier padding que pueda deformar */
+  margin: 0; /* Eliminar cualquier margin que pueda afectar */
+  box-sizing: border-box; /* Asegurar que el borde esté incluido en las dimensiones */
+}
+
+.search-button:hover {
+  background-color: var(
+    --color-secondary
+  ); /* Cambiar hover a color secundario */
+  transform: scale(1.05);
+  border-color: var(--color-button); /* Borde naranja en hover */
+}
+
+.search-icon {
+  line-height: 1;
+}
+
+/* Contenedor del resultado */
+.result-container {
+  margin-top: 20px;
+  min-height: 100px;
+  /* Altura fija para mantener estabilidad del layout */
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos del scroll */
+.friends-list-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.friends-list-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.friends-list-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-button)
+  );
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.friends-list-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-button),
+    var(--color-primary)
+  );
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar para Firefox */
+.friends-list-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #f1f1f1;
+}
+
+/* Títulos */
+.main-title {
+  font-size: 48px;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--color-white);
+}
+
+.section-title {
+  font-family: "Inter", serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Contenedores de entrada y botón */
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%; /* Ocupa 100% del left-panel */
+  margin-top: 20px;
+}
+
+.input-name {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 25px 0 0 25px;
+  font-size: 16px;
+}
+
+.button-container {
+  width: 100%; /* Cambiar de 300px fijo a 100% responsive */
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Botón para limpiar la lista */
+.button-clear {
+  background-color: #6c757d;
+  color: var(--color-white);
+  border-color: #6c757d;
+  width: 100%; /* Asegurar que ocupe todo el ancho del contenedor */
+  transition: all 0.3s ease;
+}
+
+.button-clear:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(108, 117, 125, 0.4);
+}
+
+/* Estilos de entrada de texto */
+.input-title {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #333;
+  border-right: none;
+  border-radius: 25px 0 0 25px;
+  font-family: "Merriweather", serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos de botón */
+button {
+  padding: 15px 30px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  border: 2px solid #000;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-add {
+  background-color: var(--color-tertiary);
+  color: var(--color-text);
+  border-radius: 0 25px 25px 0;
+}
+
+.button-add:hover {
+  background-color: #a1a1a1;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Listas */
+ul {
+  list-style-type: none;
+  color: var(--color-text);
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+/* Estilos específicos para la lista de amigos */
+.name-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.amigo-item {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.amigo-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: var(--color-button);
+}
+
+/* Número de orden del amigo */
+.amigo-numero {
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 30px;
+}
+
+
+.amigo-nombre {
+  flex: 1;
+  margin: 0 15px;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+
+.btn-eliminar {
+  background-color: #dc3545;
+  color: var(--color-white);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+.btn-eliminar:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+}
+
+.btn-eliminar:active {
+  transform: scale(0.95);
+}
+
+
+.empty-message {
+  text-align: center;
+  color: var(--color-tertiary);
+  font-style: italic;
+  padding: 40px 20px;
+  background-color: rgba(196, 196, 196, 0.1);
+  border-radius: 15px;
+  border: 2px dashed var(--color-tertiary);
+  margin: 20px 0;
+}
+
+.result-list {
+  margin-top: 15px;
+  color: #05df05;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.resultado-item {
+  background: linear-gradient(135deg, #05df05, #04b404);
+  color: var(--color-white);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(5, 223, 5, 0.3);
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-in;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.button-draw {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 40px;
+  color: var(--color-white);
+  background-color: var(--color-button);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.button-draw img {
+  margin-right: 40px;
+}
+
+.button-draw:hover:not(:disabled) {
+  background-color: var(--color-button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(17, 0, 252, 0.4);
+}
+
+
+.button-draw:disabled {
+  background-color: var(--color-tertiary);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-draw:disabled:hover {
+  background-color: var(--color-tertiary);
+  transform: none;
+  box-shadow: none;
+}
+
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+
+  .header-banner {
+    flex-direction: column;
+    gap: 15px; 
+  }
+
+ 
+  .header-banner img {
+    max-width: 80%; 
+    height: auto;
+  }
+
+ 
+  .content-container {
+    flex-direction: column;
+    border-radius: 32px 32px 0 0;
+  }
+
+  .left-panel {
+    flex: none;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--color-secondary);
+    width: 100%; 
+  }
+
+  .right-panel {
+    flex: none;
+    padding: 20px;
+    background-color: var(--color-secondary); 
+    width: 100%; 
+  }
+
+  /* Ajustar altura de la lista en móviles */
+  .friends-list-wrapper {
+    height: 50vh; 
+    min-height: 250px;
+    max-height: 400px;
+  }
+
+  /* Ajustar  en móviles */
+  .search-container {
+    margin: 15px 0;
+    padding: 0 5px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .search-button {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .input-name {
+    border-radius: 25px;
+    margin-bottom: 10px;
+  }
+
+  .button-add {
+    border-radius: 25px;
+    width: 100%;
+  }
+
+  .button-container {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .amigo-item {
+    margin: 8px 0;
+    padding: 12px 15px;
+  }
+
+  .friends-list-wrapper {
+    margin: 15px 0;
+    padding: 15px;
+  }
+
+  /* Ajustar altura del resultado en móviles */
+  .result-container {
+    height: 100px;
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-banner {
+    padding: 15px 0;
+  }
+
+  .main-title {
+    font-size: 28px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .left-panel,
+  .right-panel {
+    padding: 25px; /* Aumentar de 15px a 25px para mejor respiración visual */
+  }
+
+  .input-section {
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Ajustar altura de la lista en pantallas muy pequeñas */
+  .friends-list-wrapper {
+    height: 45vh;
+    min-height: 200px;
+    max-height: 350px;
+  }
+}
+
+/* Modal para resultado del sorteo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-content {
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    var(--color-white)
+  );
+  border-radius: 25px;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.4s ease-out;
+  border: 3px solid var(--color-primary);
+}
+
+.modal-header {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-button)
+  );
+  color: var(--color-white);
+  padding: 25px 30px;
+  border-radius: 22px 22px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.winner-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.winner-icon {
+  font-size: 80px;
+  animation: bounce 2s infinite;
+}
+
+.winner-name {
+  font-family: "Merriweather", serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--color-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.winner-message {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.modal-footer {
+  padding: 25px 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-button {
+  padding: 12px 25px;
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(75, 105, 253, 0.3);
+}
+
+.modal-button.secondary {
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.modal-button.secondary:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Animaciones del modal */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}

@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Amigo Secreto</title>
+  </head>
+
+  <body>
+    <main class="main-content">
+      <header class="header-banner">
+        <h1 class="main-title">Amigo Secreto</h1>
+        <img
+          src="assets/amigo-secreto.png"
+          alt="Imagen representativa de amigo secreto"
+        />
+      </header>
+
+      <div class="content-container">
+        <section class="left-panel">
+          <div class="input-section">
+            <h2 class="section-title">Agregar Amigos</h2>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="amigo"
+                class="input-name"
+                placeholder="Escribe un nombre"
+              />
+              <button class="button-add" onclick="agregarAmigo()">
+                Añadir
+              </button>
+            </div>
+
+            <div class="button-container">
+              <button
+                class="button-draw"
+                onclick="sortearAmigo()"
+                aria-label="Sortear amigo secreto"
+              >
+                <img
+                  src="assets/play_circle_outline.png"
+                  alt="Ícono para sortear"
+                />
+                Sortear amigo
+              </button>
+              <button
+                class="button-clear"
+                onclick="limpiarLista()"
+                aria-label="Limpiar lista de amigos"
+              >
+                Limpiar lista
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3><center>Instrucciones</center></h3>
+            <ul>
+              <li>Escribe nombres y añade con "Añadir". Mínimo 2 participantes</li>
+              <li>No se admiten duplicados</li>
+              <li>Para elegir clic en "Sortear amigo"</li>
+              <li>Usa "×" para eliminar nombres</li>
+            </ul>
+          </div>
+
+
+          <div class="stats-section">
+            <div class="stats-grid">
+              <div class="stat-item">
+              </div>
+              <div class="stat-item">
+              </div>
+            </div>
+          </div>
+        </section>
+
+   
+        <section class="right-panel">
+          <div class="friends-list-container">
+            <h2 class="section-title">Lista de Amigos</h2>
+
+       
+            <div class="search-container">
+              <input
+                type="text"
+                id="buscadorAmigos"
+                class="search-input"
+                placeholder="Buscar amigos..."
+                onkeyup="filtrarAmigos()"
+              />
+              <button
+                class="search-button"
+                onclick="limpiarBusqueda()"
+                title="Limpiar búsqueda"
+              >
+                <span class="search-icon">×</span>
+              </button>
+            </div>
+
+            <div class="friends-list-wrapper">
+              <ul
+                id="listaAmigos"
+                class="name-list"
+                aria-labelledby="listaAmigos"
+                role="list"
+              ></ul>
+            </div>
+          </div>
+
+ 
+          <div class="result-container">
+            <ul id="resultado" class="result-list" aria-live="polite"></ul>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="modalResultado" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">🎉Tu amigo secreto es...</h2>
+          <button class="modal-close" onclick="cerrarModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="winner-display">
+            <div class="winner-icon">🎁</div>
+            <div class="winner-name" id="modalWinnerName">
+              Nombre del ganador
+            </div>
+            <div class="winner-message">¡Es tu amigo secreto!</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="modal-button" onclick="cerrarModal()">Cerrar</button>
+          <button class="modal-button secondary" onclick="resetearAplicacion()">
+            Sortear Otro
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html
